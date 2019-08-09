@@ -1,7 +1,32 @@
+###
 query {
-    user(id: "123") {
-        id,
-        name,
+    user(id: "d71feeab-00c8-47bf-927e-92aa72ee3699") {
+        id
+        name
         age
+        posts {
+            title
+        }
+    }
+}
+
+###
+
+query {
+    users {
+        id
+        name
+        age
+        posts {
+            title
+        }
+    }
+}
+
+###
+
+mutation {
+    createUser(name: "Thijs Wouters", age: 37) {
+        id
     }
 }

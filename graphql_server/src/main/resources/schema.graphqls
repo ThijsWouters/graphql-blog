@@ -1,9 +1,21 @@
 type Query {
+    users: [User]
     user(id: ID): User
+}
+
+type Mutation {
+    createUser(name: String, age: Int): User
 }
 
 type User {
     id: ID
     name: String
     age: Int
+    posts: [Post]
+}
+
+type Post {
+    id: ID
+    title: String
+    contents: String
 }

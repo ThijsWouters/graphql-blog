@@ -9,17 +9,22 @@ Content-Type: application/json
 
 ###
 
+GET http://localhost:7000
+
 ### Create post
 POST http://localhost:8000/
 Content-Type: application/json
 
 {
-  "authorId": "<copy id from user call>",
+  "authorId": "bbf92272-afef-4aab-a9e1-0c372e1de2ac",
   "title": "GraphQL works like this",
   "contents": "It just works, after you implement it ofcourse."
 }
 
 ###
+
+GET http://localhost:8000/user/b7d394ab-8366-4966-a797-a6aaacbb7013
+
 
 ### Create comment
 POST http://localhost:9000/
