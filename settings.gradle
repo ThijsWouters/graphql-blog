@@ -1,0 +1,3 @@
+rootProject.name = 'blog-graphql'
+
+include 'user_microservice'
