@@ -1,0 +1,20 @@
+POST http://localhost:7000/
+Content-Type: application/json
+
+{
+"name": "Thijs Wouters",
+"age": 37
+}
+
+###
+
+POST http://localhost:8000/
+Content-Type: application/json
+
+{
+  "authorId": "0d17f418-c09c-4a21-8238-be894bdb499f",
+  "title": "GraphQL works like this",
+  "contents": "It just works, after you implement it."
+}
+
+###

@@ -3,7 +3,6 @@ package user_microservice;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.xml.ws.Response;
 import java.net.URI;
 import java.util.Collection;
 import java.util.UUID;
@@ -17,7 +16,7 @@ public class UserController {
     }
 
     @PostMapping("/")
-    public ResponseEntity<User> createUser(UserData data) {
+    public ResponseEntity<User> createUser(@RequestBody UserData data) {
         User user = new User(
                 UUID.randomUUID().toString(),
                 data.getName(),
@@ -29,7 +28,7 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<User> updateUser(UserData data, @PathVariable String id) {
+    public ResponseEntity<User> updateUser(@RequestBody UserData data, @PathVariable String id) {
         User user = userRepo.get(id);
         if(user == null){
             return ResponseEntity.notFound().build();

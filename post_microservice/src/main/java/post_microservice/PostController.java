@@ -16,7 +16,7 @@ public class PostController {
     }
 
     @PostMapping
-    public ResponseEntity<Post> create(PostData data) {
+    public ResponseEntity<Post> create(@RequestBody PostData data) {
         Post post = new Post(UUID.randomUUID().toString(),
                 data.getAuthorId(),
                 data.getTitle(),
@@ -28,7 +28,7 @@ public class PostController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Post> update(PostData data, @PathVariable String id) {
+    public ResponseEntity<Post> update(@RequestBody PostData data, @PathVariable String id) {
         Post post = postRepo.get(id);
         if(post == null){
             return ResponseEntity.notFound().build();
