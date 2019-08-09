@@ -28,7 +28,7 @@ Content-Type: application/json
 {
   "authorId": "<copy id from create user call>",
   "postId": "<copy id from create post call>",
-  "contents": "No shit, Shirlock"
+  "contents": "No shit, Sherlock"
 }
 
 ###
