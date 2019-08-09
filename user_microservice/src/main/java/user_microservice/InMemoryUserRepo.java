@@ -19,4 +19,19 @@ public class InMemoryUserRepo implements UserRepo {
     public Collection<User> all() {
         return userMap.values();
     }
+
+    @Override
+    public void create(User user) {
+        save(user);
+    }
+
+    @Override
+    public void delete(String id) {
+        userMap.remove(id);
+    }
+
+    @Override
+    public void save(User user) {
+        userMap.put(user.getId(), user);
+    }
 }

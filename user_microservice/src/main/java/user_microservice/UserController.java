@@ -1,10 +1,12 @@
 package user_microservice;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
+import javax.xml.ws.Response;
+import java.net.URI;
 import java.util.Collection;
+import java.util.UUID;
 
 @RestController
 public class UserController {
@@ -14,13 +16,56 @@ public class UserController {
         this.userRepo = userRepo;
     }
 
+    @PostMapping("/")
+    public ResponseEntity<User> createUser(UserData data) {
+        User user = new User(
+                UUID.randomUUID().toString(),
+                data.getName(),
+                data.getAge());
+        userRepo.create(user);
+        return ResponseEntity
+                .created(URI.create(String.format("http://localhost:7000/%s", user.getId())))
+                .body(user);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<User> updateUser(UserData data, @PathVariable String id) {
+        User user = userRepo.get(id);
+        if(user == null){
+            return ResponseEntity.notFound().build();
+        } else {
+            user.setName(data.getName());
+            user.setAge(data.getAge());
+            userRepo.save(user);
+            return ResponseEntity.ok(user);
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteUser(@PathVariable String id) {
+        User user = userRepo.get(id);
+        if (user == null) {
+            return ResponseEntity.notFound()
+                    .build();
+        } else {
+            userRepo.delete(id);
+            return ResponseEntity.ok()
+                    .build();
+        }
+    }
+
     @GetMapping("/")
     public Collection<User> getAll() {
         return userRepo.all();
     }
 
     @GetMapping("/{id}")
-    public User getUser(@PathVariable String id) {
-        return userRepo.get(id);
+    public ResponseEntity<User> getUser(@PathVariable String id) {
+        User user = userRepo.get(id);
+        if(user == null) {
+            return ResponseEntity.notFound().build();
+        } else {
+            return ResponseEntity.ok(user);
+        }
     }
 }
