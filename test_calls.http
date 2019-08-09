@@ -1,3 +1,4 @@
+### Create User
 POST http://localhost:7000/
 Content-Type: application/json
 
@@ -8,13 +9,26 @@ Content-Type: application/json
 
 ###
 
+### Create post
 POST http://localhost:8000/
 Content-Type: application/json
 
 {
-  "authorId": "0d17f418-c09c-4a21-8238-be894bdb499f",
+  "authorId": "<copy id from user call>",
   "title": "GraphQL works like this",
-  "contents": "It just works, after you implement it."
+  "contents": "It just works, after you implement it ofcourse."
+}
+
+###
+
+### Create comment
+POST http://localhost:9000/
+Content-Type: application/json
+
+{
+  "authorId": "<copy id from create user call>",
+  "postId": "<copy id from create post call>",
+  "contents": "No shit, Shirlock"
 }
 
 ###

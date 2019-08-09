@@ -43,8 +43,8 @@ public class PostController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteUser(@PathVariable String id) {
-        Post user = postRepo.get(id);
-        if (user == null) {
+        Post post = postRepo.get(id);
+        if (post == null) {
             return ResponseEntity.notFound()
                     .build();
         } else {
