@@ -9,6 +9,10 @@ import graphql.schema.idl.RuntimeWiring;
 import graphql.schema.idl.SchemaGenerator;
 import graphql.schema.idl.SchemaParser;
 import graphql.schema.idl.TypeDefinitionRegistry;
+import graphql_server.mutation.CreateUserDataFetcher;
+import graphql_server.query.UserDataFetcher;
+import graphql_server.query.UserPostsDataFetcher;
+import graphql_server.query.UsersDataFetcher;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
@@ -56,34 +60,12 @@ public class GraphQLProvider {
 
         return RuntimeWiring.newRuntimeWiring()
                 .type(newTypeWiring("Query")
-                        .dataFetcher("users", environment -> restTemplate
-                                .exchange("http://localhost:7000/",
-                                        HttpMethod.GET,
-                                        null,
-                                        listOfMaps)
-                                .getBody())
-                        .dataFetcher("user", environment -> restTemplate
-                                .getForObject(format("http://localhost:7000/%s", (String) environment.getArgument("id")), Map.class)))
+                        .dataFetcher("users", new UsersDataFetcher())
+                        .dataFetcher("user", new UserDataFetcher()))
                 .type(newTypeWiring("Mutation")
-                        .dataFetcher("createUser", environment -> restTemplate
-                                .exchange(post(create("http://localhost:7000"))
-                                                .body((Map) ImmutableMap.of(
-                                                        "name", (String) environment.getArgument("name"),
-                                                        "age", (Integer) environment.getArgument("age"))
-                                                ),
-                                        Map.class)
-                                .getBody()))
+                        .dataFetcher("createUser", new CreateUserDataFetcher()))
                 .type(newTypeWiring("User")
-                        .dataFetcher("posts", environment -> {
-                            Map<String, Object> user = environment.getSource();
-                            return restTemplate
-                                    .exchange(
-                                            String.format("http://localhost:8000/user/%s", user.get("id")),
-                                            HttpMethod.GET,
-                                            null,
-                                            listOfMaps)
-                                    .getBody();
-                        }))
+                        .dataFetcher("posts", new UserPostsDataFetcher()))
                 .build();
     }
 }
