@@ -9,6 +9,7 @@ import graphql.schema.idl.SchemaGenerator;
 import graphql.schema.idl.SchemaParser;
 import graphql.schema.idl.TypeDefinitionRegistry;
 import graphql_server.mutation.CreateUserDataFetcher;
+import graphql_server.mutation.DeleteUserDataFetcher;
 import graphql_server.mutation.UpdateUserDataFetcher;
 import graphql_server.query.AuthorDataFetcher;
 import graphql_server.query.UserDataFetcher;
@@ -62,6 +63,7 @@ public class GraphQLProvider {
                 .type(newTypeWiring("Mutation")
                         .dataFetcher("createUser", new CreateUserDataFetcher())
                         .dataFetcher("updateUser", new UpdateUserDataFetcher())
+                        .dataFetcher("deleteUser", new DeleteUserDataFetcher())
                 )
                 .type(newTypeWiring("User")
                         .dataFetcher("posts", new UserPostsDataFetcher()))

@@ -42,9 +42,15 @@ mutation {
 ###
 
 mutation {
-    updateUser(id: "20b42890-658b-47fe-a419-4e006e3ed89c", name: "Thijs Wouters", age: 25) {
+    updateUser(id: "04d26629-504f-488a-9c44-db1bfaac2461", name: "Thijs Wouters", age: 25) {
         id
         name
         age
     }
+}
+
+###
+
+mutation {
+    deleteUser(id: "04d26629-504f-488a-9c44-db1bfaac2461")
 }
