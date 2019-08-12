@@ -10,6 +10,7 @@ import graphql.schema.idl.SchemaGenerator;
 import graphql.schema.idl.SchemaParser;
 import graphql.schema.idl.TypeDefinitionRegistry;
 import graphql_server.mutation.CreateUserDataFetcher;
+import graphql_server.query.AuthorDataFetcher;
 import graphql_server.query.UserDataFetcher;
 import graphql_server.query.UserPostsDataFetcher;
 import graphql_server.query.UsersDataFetcher;
@@ -66,6 +67,8 @@ public class GraphQLProvider {
                         .dataFetcher("createUser", new CreateUserDataFetcher()))
                 .type(newTypeWiring("User")
                         .dataFetcher("posts", new UserPostsDataFetcher()))
+                .type(newTypeWiring("Post")
+                .dataFetcher("author", new AuthorDataFetcher()))
                 .build();
     }
 }

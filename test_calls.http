@@ -16,9 +16,9 @@ POST http://localhost:8000/
 Content-Type: application/json
 
 {
-  "authorId": "bbf92272-afef-4aab-a9e1-0c372e1de2ac",
+  "authorId": "121b3f6c-ff51-47d2-bd74-0b43e0465d3a",
   "title": "GraphQL works like this",
-  "contents": "It just works, after you implement it ofcourse."
+  "contents": "It just works, after you implement it of course."
 }
 
 ###

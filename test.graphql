@@ -6,6 +6,9 @@ query {
         age
         posts {
             title
+            author {
+                name
+            }
         }
     }
 }
@@ -19,6 +22,9 @@ query {
         age
         posts {
             title
+            author {
+                name
+            }
         }
     }
 }
